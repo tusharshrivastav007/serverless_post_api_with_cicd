@@ -18,6 +18,9 @@ jobs:
         with:
           python-version: '3.8' # Choose the appropriate Python version
 
+       - name: Install Serverless Framework
+        run: npm install -g serverless
+
       - name: Deploy Serverless Application
         run: sls deploy
         env:
