@@ -1,1 +1,38 @@
+service: cicd-with-post-api
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-1
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:PutItem
+    Resource: 
+      - "arn:aws:dynamodb:us-east-1:651191338694:table/Customer"
+functions:
+  myLambdaFunction:
+    handler: handler.lambda_handler
+    events:
+      - http: 
+          path: /customers
+          method: post
+  
+resources:
+  Resources:
+    CustomerTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Customer
+        AttributeDefinitions:
+          - AttributeName: customerId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: customerId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
 
