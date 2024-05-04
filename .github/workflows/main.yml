@@ -18,11 +18,17 @@ jobs:
         with:
           python-version: '3.8' # Choose the appropriate Python version
 
-       - name: Install Serverless Framework
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Choose the appropriate Node.js version
+
+      - name: Install Serverless Framework
         run: npm install -g serverless
 
       - name: Deploy Serverless Application
-        run: sls deploy
+        run: |
+          sls deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
