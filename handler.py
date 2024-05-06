@@ -38,7 +38,7 @@ def lambda_handler(event, context):
         
         return {
             'statusCode': 200,
-            'body': json.dumps('Customer data added successfully!')
+            'body': json.dumps('Customers data added successfully!')
         }
     except Exception as e:
         logging.error(f"Error inserting data into DynamoDB: {str(e)}")
